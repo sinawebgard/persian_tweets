@@ -6,7 +6,7 @@ a <- length(user.names)
 user.info <- data.frame()
 for (i in 1:a){
         temp <- mydata[mydata$user_display_name == 
-                               user.names[i], c(2,3,4, 5, 6, 7, 8, 9, 10, 11)]
+                               user.names[i], 2:11]
         user.info <- rbind(user.info, temp[1, ])
 
 }
