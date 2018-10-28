@@ -1,16 +1,12 @@
 if(!exists("mydata")){
         mydata <- read.csv("data/tweets_persian.csv", stringsAsFactors = FALSE)  
 }
-user.names <- unique(mydata$userid)
-a <- length(user.names)
-user.info <- data.frame()
-for (i in 1:a){
-        temp <- mydata[mydata$userid == 
-                               user.names[i], 2:11]
-        tweet_count <- length(mydata
-                              [mydata$userid == user.names[i], 1])
-        temp <- cbind(temp[1, ], tweet_count)
-        user.info <- rbind(user.info, temp)
+unique.users <- unique(mydata[, 2:11])
+tweet_count <- vector(mode = "numeric")
+for (i in 1:nrow(unique.users)){
+        user_tweet_count <- nrow(mydata
+                                 [mydata$userid == unique.users$userid[i], ])
+        tweet_count <- rbind(tweet_count, user_tweet_count)
 
 }
-rm(list = c("a", "i", "tweet_count", "user.names", "temp"))
+user.info <- cbind(unique.users, tweet_count)
